@@ -1,0 +1,41 @@
+# Cloudflare Worker 配置文件
+
+name = "wechat-customer-service"
+main = "index.js"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+name = "wechat-customer-service"
+# 微信企业号配置
+WECHAT_CORP_ID="wwe2c56aa8f90adfd0"
+WECHAT_KF_SECRET="Nz3Ala6bixcC8Pal0aqK_wN0fce0nFIKktJxtIi3Hbk"
+WECHAT_KF_TOKEN="gqgd3a8N5E64p1MNaanr"
+WECHAT_KF_ENCODING_AES_KEY="WOeUpjPSRlRGPy1ytnYS68BunLqhSKMoIDOqkiLi3av"
+
+# 加密服务配置（由于 CF Worker CRYPTO 兼容性问题，需要单独部署）
+CRYPTO_SERVICE_URL="https://wxchat-tealme.deno.dev"
+
+# OpenAI API 配置
+OPENAI_API_KEY="sk-vAm55kJZAHNwqDn5AHAVNzmpCCz6xR4tU70VEDRyTCDgdMGs"
+OPENAI_BASE_URL="https://aiapi.321210.xyz"
+OPENAI_MODEL="t佬-gemini-2.5-pro"
+OPENAI_TIMEOUT=30000
+# OPENAI_ORGANIZATION=org-your-org-id
+# OPENAI_PROJECT=proj-your-project-id
+
+# 系统提示词配置
+SYSTEM_PROMPT="your are helpful assistant, reply in chinese, and reply in plain text format, text length should be less than 10240 characters" 
+
+
+# KV存储配置（用于持久化对话历史）
+[[kv_namespaces]]
+binding = "CONVERSATIONS"
+id = "1f71a831cdd2481991a620358c5c4171"
+preview_id = ""
+
+# KV存储配置（用于消息处理状态跟踪）
+[[kv_namespaces]]
+binding = "MESSAGE_TRACKER"
+id = "9d054d55d73146d8afd39c35eae12fd8"
+preview_id = ""
